@@ -1,10 +1,16 @@
 import React from 'react';
 import Header from '../components/Header';
+import searchAlbumsAPI from '../services/searchAlbumsAPI';
+import Album from '../components/Album';
+import Loading from '../components/Loading';
 
 export default class Search extends React.Component {
   state = {
     disableButton: true,
     searchButton: '',
+    displayResult: false,
+    resultBand: '',
+    band: '',
   };
 
   handleChange = (element) => {
@@ -16,17 +22,28 @@ export default class Search extends React.Component {
   };
 
   handleSubmit = async (event) => {
+    const { searchButton } = this.state;
     event.preventDefault();
-    this.setState({
+    this.setState({ searchButton: '' });
+    searchAlbumsAPI(searchButton).then((band) => {
+      this.setState({
+        displayLoading: false,
+        band: searchButton,
+        searchButton: '',
+        displayResult: true,
+        resultBand: band,
 
-    });
-    this.setState({
-      searchButton: '',
+      });
     });
   };
 
   render() {
-    const { disableButton, searchButton } = this.state;
+    const {
+      disableButton,
+      searchButton, band,
+      displayLoading,
+      displayResult,
+      resultBand } = this.state;
     return (
       <div data-testid="page-search">
         <Header />
@@ -48,6 +65,8 @@ export default class Search extends React.Component {
           >
             Pesquisar
           </button>
+          { displayLoading && <Loading /> }
+          { displayResult && <Album data={ resultBand } band={ band } /> }
         </form>
       </div>
     );
