@@ -11,10 +11,10 @@ export default class Login extends Component {
   };
 
   handleClick = () => {
-    const { name } = this.state;
+    const { name, email, description, image } = this.state;
     const { history } = this.props;
     this.setState({ loading: true });
-    createUser({ name }).then(() => history.push('/search'));
+    createUser({ name, email, description, image }).then(() => history.push('/search'));
   };
 
   handleChange = ({ target }) => {
