@@ -63,14 +63,13 @@ export default class MusicCard extends React.Component {
     const { loading, favoriteSong } = this.state;
     if (loading) return <Loading />;
     return (
-      <div className="favorites">
+      <div>
         <p>{ musicData.trackName }</p>
-        <div className="song-infos">
+        <div>
 
           <img src={ musicData.artworkUrl100 } alt={ musicData.collectionName } />
 
           <audio
-            className="track-player"
             data-testid="audio-component"
             src={ musicData.previewUrl }
             controls

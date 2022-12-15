@@ -26,10 +26,10 @@ export default class Album extends React.Component {
   render() {
     const { artistMusics, albumData } = this.state;
     return (
-      <div data-testid="page-album" className="page-album">
+      <div data-testid="page-album">
         <Header />
-        <div className="songs-container">
-          <div className="page-title">
+        <div>
+          <div>
             <h2 data-testid="artist-name">{albumData.artistName}</h2>
             <h3 data-testid="album-name">{albumData.collectionName}</h3>
           </div>
