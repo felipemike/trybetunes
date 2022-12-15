@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Album from '../components/Album';
+import Band from '../components/Band';
 import Loading from '../components/Loading';
 
 export default class Search extends React.Component {
@@ -66,7 +66,7 @@ export default class Search extends React.Component {
             Pesquisar
           </button>
           { displayLoading && <Loading /> }
-          { displayResult && <Album data={ resultBand } band={ band } /> }
+          { displayResult && <Band data={ resultBand } band={ band } /> }
         </form>
       </div>
     );
