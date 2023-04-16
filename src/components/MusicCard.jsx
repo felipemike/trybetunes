@@ -2,29 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
-import getMusics from '../services/musicsAPI';
 
 export default class MusicCard extends React.Component {
   state = {
     loading: false,
     favoriteSong: false,
-    musics: [],
   };
 
   componentDidMount() {
-    (
-      this.fetchFavorites());
+    this.fetchFavorites();
   }
 
-  verifyFavorites = () => {
-    const { musics } = this.state;
+  verifyFavorites = (musics) => {
     const { musicData } = this.props;
-    const favorite = musics.find((music) => music.trackId === musicData.trackId);
-    if (favorite) {
-      this.setState({
-        favoriteSong: true,
-      });
-    }
+    const music = musics.find((item) => item.trackId === musicData.trackId);
+    if (music) return music;
+    return false;
   };
 
   fetchFavorites = () => {
@@ -33,38 +26,36 @@ export default class MusicCard extends React.Component {
     }, async () => {
       const musics = await getFavoriteSongs();
       this.setState({
-        musics,
         loading: false,
-      }, () => this.verifyFavorites());
+        favoriteSong: this.verifyFavorites(musics),
+      });
     });
   };
 
-  handleChange = ({ target }) => {
-    const { id } = target;
+  handleChange = ({ target: { checked } }) => {
+    const { musicData } = this.props;
     this.setState({
       loading: true,
     }, async () => {
-      const { favoriteSong } = this.state;
-      const music = await getMusics(id);
-      if (favoriteSong) {
-        await removeSong(...music);
+      if (checked) {
+        await removeSong(musicData);
       } else {
-        await addSong(...music);
+        await addSong(musicData);
       }
       this.setState({
-        favoriteSong: !favoriteSong,
+        favoriteSong: checked,
         loading: false,
       });
     });
   };
 
   render() {
-    const { musicData } = this.props;
+    const { musicData, onClick } = this.props;
     const { loading, favoriteSong } = this.state;
     if (loading) return <Loading />;
     return (
       <div>
-        <p>{ musicData.trackName }</p>
+        <p>{musicData.trackName}</p>
         <div>
 
           <img src={ musicData.artworkUrl100 } alt={ musicData.collectionName } />
@@ -90,6 +81,7 @@ export default class MusicCard extends React.Component {
               name="favoriteSong"
               checked={ favoriteSong }
               onChange={ this.handleChange }
+              onClick={ onClick }
             />
           </label>
         </div>
@@ -97,6 +89,7 @@ export default class MusicCard extends React.Component {
     );
   }
 }
+
 MusicCard.propTypes = {
   musicData: PropTypes.shape({
     trackName: PropTypes.string.isRequired,
@@ -105,4 +98,5 @@ MusicCard.propTypes = {
     previewUrl: PropTypes.string.isRequired,
     trackId: PropTypes.number.isRequired,
   }).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
