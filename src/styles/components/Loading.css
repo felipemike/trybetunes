@@ -1,0 +1,8 @@
+.loading-message-container {
+    align-items: center;
+    color: #023031;
+    display: flex;
+    font-size: 1.6rem;
+    height: 7.4rem;
+    justify-content: center;
+  }

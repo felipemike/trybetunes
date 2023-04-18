@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import '../styles/components/AlbumsList.css';
 
 export default class Album extends React.Component {
   render() {
@@ -9,16 +10,16 @@ export default class Album extends React.Component {
       return <p>Nenhum álbum foi encontrado</p>;
     }
     return (
-      <div>
-        <h1>{ `Resultado de álbuns de: ${band}` }</h1>
-        <section>
+      <main>
+        <section className="albums-section">
+          <h3>{ `Resultado de álbuns de: ${band}` }</h3>
           { data.map((album) => (
             <Link
               key={ album.collectionId }
               to={ `/album/${album.collectionId}` }
               data-testid={ `link-to-album-${album.collectionId}` }
             >
-              <div>
+              <div className="albums-cards-container">
                 <img src={ album.artworkUrl100 } alt={ album.collectionName } />
                 <p>{ album.collectionName }</p>
                 <p>{ album.artistName }</p>
@@ -26,7 +27,7 @@ export default class Album extends React.Component {
             </Link>
           )) }
         </section>
-      </div>
+      </main>
     );
   }
 }

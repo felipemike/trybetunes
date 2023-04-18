@@ -2,6 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
+import headerLogo from '../assets/header-logo.png';
+import noPicture from '../assets/no-picture-small.png';
+import '../styles/components/Header.css';
 
 export default class Header extends React.Component {
   constructor() {
@@ -9,6 +12,7 @@ export default class Header extends React.Component {
 
     this.state = {
       login: '',
+      image: '',
     };
   }
 
@@ -19,16 +23,25 @@ export default class Header extends React.Component {
   }
 
   render() {
-    const { login } = this.state;
+    const { login, image } = this.state;
     return (
       login === '' ? <Loading />
         : (
 
           <header data-testid="header-component">
-            <div className="user" data-testid="header-user-name">
-              <p>
+            <img
+              className="trybetunes-logo"
+              src={ headerLogo }
+              alt="logotipo do TrybeTunes"
+            />
+            <div className="username-container">
+              <img
+                src={ image || noPicture }
+                alt="Foto de perfil"
+              />
+              <spam className="user" data-testid="header-user-name">
                 { login }
-              </p>
+              </spam>
             </div>
             <nav>
               <Link to="/search" data-testid="link-to-search">Pesquisar</Link>

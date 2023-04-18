@@ -35,16 +35,18 @@ export default class Favorites extends React.Component {
     return (
       <div data-testid="page-favorites">
         <Header />
-        <section>
-          <h2>Favorites songs</h2>
-          {favoritesList.map((music) => (
-            <MusicCard
-              key={ music.trackId }
-              musicData={ music }
-              onClick={ this.favoretChange }
-            />
-          ))}
-        </section>
+        <main className="page-favorites">
+          <section>
+            <h3 className="favorite-songs-header">Músicas favoritas:</h3>
+            {favoritesList.map((music) => (
+              <MusicCard
+                key={ music.trackId }
+                musicData={ music }
+                onClick={ this.favoretChange }
+              />
+            ))}
+          </section>
+        </main>
       </div>
     );
   }

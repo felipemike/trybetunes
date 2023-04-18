@@ -1,0 +1,73 @@
+header {
+    background-color: #023031;
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 1.6rem;
+    justify-content: space-between;
+  }
+  
+  .trybetunes-logo {
+    margin-bottom: 1.6rem;
+    margin-left: 2rem;
+    width: 10.6rem;
+  }
+  
+  header nav {
+    box-shadow: 0.1px 3px 2px rgb(173, 173, 173);
+    display: flex;
+    width: 100%;
+  }
+  
+  .username-container {
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    color: #29313d;
+    display: flex;
+    height: 4rem;
+    justify-content: flex-start;
+    margin-right: 2.6rem;
+    margin-top: 2.4rem;
+    max-width: 20rem;
+  }
+  
+  .username-container img {
+    border-radius: 50%;
+    height: 3rem;
+    margin: 4px;
+    object-fit: cover;
+    width: 3rem;
+  }
+  
+  .username-container span {
+    display: block;
+    margin-left: 0.8rem;
+    margin-right: 1.5rem;
+    max-width: 14rem;
+    overflow: hidden;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  
+  header nav > * {
+    background-color: #f0f2f5;
+    border-right: 2px solid white;
+    color: #2fc18c;
+    font-weight: 800;
+    padding: 1.6rem;
+    text-align: center;
+    width: 100%;
+  }
+  
+  header nav > *:hover {
+    background-color: #036b52;
+    color: white;
+  }
+  
+  @media only screen and ( max-width : 26.56em ) {
+  
+    .username-container span {
+      display: none;
+    }
+  }  

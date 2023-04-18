@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { addSong, removeSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
+import '../styles/components/MusicCard.css';
 
 export default class MusicCard extends React.Component {
   state = {
@@ -54,36 +55,33 @@ export default class MusicCard extends React.Component {
     const { loading, favoriteSong } = this.state;
     if (loading) return <Loading />;
     return (
-      <div>
-        <p>{musicData.trackName}</p>
-        <div>
+      <div className="music-card-container">
+        <span>{musicData.trackName}</span>
 
-          <img src={ musicData.artworkUrl100 } alt={ musicData.collectionName } />
+        <img src={ musicData.artworkUrl100 } alt={ musicData.collectionName } />
 
-          <audio
-            data-testid="audio-component"
-            src={ musicData.previewUrl }
-            controls
-          >
-            <track kind="captions" />
-            Erro ao carregar o arquivo de áudio
-            {' '}
-            <code>audio</code>
-          </audio>
-          <label
+        <audio
+          className="audio-player"
+          data-testid="audio-component"
+          src={ musicData.previewUrl }
+          controls
+        >
+          <track kind="captions" />
+          Erro ao carregar o arquivo de áudio
+          {' '}
+          <code>audio</code>
+        </audio>
+        <div className="favorite-icon-container">
+          <input
             htmlFor={ musicData.trackName }
-          >
-            Favorite
-            <input
-              data-testid={ `checkbox-music-${musicData.trackId}` }
-              type="checkbox"
-              id={ musicData.trackId }
-              name="favoriteSong"
-              checked={ favoriteSong }
-              onChange={ this.handleChange }
-              onClick={ onClick }
-            />
-          </label>
+            data-testid={ `checkbox-music-${musicData.trackId}` }
+            type="checkbox"
+            id={ musicData.trackId }
+            name="favoriteSong"
+            checked={ favoriteSong }
+            onChange={ this.handleChange }
+            onClick={ onClick }
+          />
         </div>
       </div>
     );

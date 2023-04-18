@@ -1,0 +1,39 @@
+.page-search {
+    padding: 0 1rem;
+  }
+  
+  .search-form-container form {
+    box-shadow: 0 0.2rem 0.3rem rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: space-between;
+    margin: 8rem auto;
+    max-width: 50rem;
+  }
+  
+  .search-form-container form input {
+    border: none;
+    font-size: 1.6rem;
+    text-indent: 1.6rem;
+    width: 100%;
+  }
+  
+  .search-form-container form input:focus {
+    outline: none;
+  }
+  
+  .search-form-container form button {
+    background-color: #003be5;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 1.6rem;
+    height: 38px;
+    width: 100px;
+  }
+  
+  .search-form-container form button:disabled {
+    background: rgb(160, 160, 160);
+    color: rgb(75, 75, 75);
+    cursor: auto;
+    opacity: 0.6;
+  }
