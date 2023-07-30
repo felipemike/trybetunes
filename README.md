@@ -6,6 +6,9 @@ o TrybeTunes é uma aplicação capaz de reproduzir músicas das mais variadas b
 A aplicação foi feita com React, com base em um protótipo do Figma para o layout das telas, e é abastecida pela iTunes Search API.
 
 ![Preview da aplicação](https://github.com/felipemike/trybetunes/blob/main/src/img/prev.png)
+
+Você pode ver o projeto em seu navegador [clicando aqui](https://felipemike.github.io/trybetunes/)
+
 ## Tecnologias usadas
 
 * React
