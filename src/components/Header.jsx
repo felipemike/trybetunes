@@ -1,56 +1,62 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { getUser } from '../services/userAPI';
-import Loading from './Loading';
-import headerLogo from '../assets/header-logo.png';
-import noPicture from '../assets/no-picture-small.png';
-import '../styles/components/Header.css';
+import logo from '../img/logo.png';
+import iconProfile from '../img/icon_profile.png';
+import iconSearch from '../img/icon_search.png';
+import iconFavorite from '../img/icon_favorite.png';
+import iconHome from '../img/icon_home.png';
 
-export default class Header extends React.Component {
-  constructor() {
-    super();
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
 
     this.state = {
-      login: '',
-      image: '',
+      name: undefined,
+      image: undefined,
     };
   }
 
-  componentDidMount() {
-    getUser()
-      .then((param) => this
-        .setState({ login: param.name }));
+  async componentDidMount() {
+    const { name, image } = await getUser();
+    this.setState({
+      name,
+      image,
+    });
   }
 
   render() {
-    const { login, image } = this.state;
+    const { name, image } = this.state;
     return (
-      login === '' ? <Loading />
-        : (
-
-          <header data-testid="header-component">
-            <img
-              className="trybetunes-logo"
-              src={ headerLogo }
-              alt="logotipo do TrybeTunes"
-            />
-            <div className="username-container">
-              <img
-                src={ image || noPicture }
-                alt="Foto de perfil"
-              />
-              <spam className="user" data-testid="header-user-name">
-                { login }
-              </spam>
-            </div>
-            <nav>
-              <Link to="/search" data-testid="link-to-search">Pesquisar</Link>
-              <Link to="/favorites" data-testid="link-to-favorites">Favoritos</Link>
-              <Link to="/profile" data-testid="link-to-profile">Perfil</Link>
-            </nav>
-          </header>
-
-        )
+      <header data-testid="header-component">
+        <img src={ logo } alt="" />
+        <nav>
+          <Link to="/">
+            <img src={ iconHome } alt="" />
+            Home
+          </Link>
+          <Link to="/search" data-testid="link-to-search">
+            <img src={ iconSearch } alt="" />
+            Buscar
+          </Link>
+          <Link to="/favorites" data-testid="link-to-favorites">
+            <img src={ iconFavorite } alt="" />
+            Favoritos
+          </Link>
+          <Link to="/profile" data-testid="link-to-profile">
+            <img src={ iconProfile } alt="" />
+            Profile
+          </Link>
+        </nav>
+        <div className="header-user">
+          {
+            image ? <img src={ image } alt="" /> : null
+          }
+          <p data-testid="header-user-name">{ name ?? 'Carregando...' }</p>
+        </div>
+      </header>
     );
   }
 }
+
+export default Header;
